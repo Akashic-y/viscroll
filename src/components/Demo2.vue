@@ -41,7 +41,10 @@ export default {
           if (iscroll) {
               iscroll.on('scrollStart', function() {
                 console.log('scrollStart')
-            })
+              })
+              iscroll.on('scrollEnd', function() {
+                // console.log(iscroll)
+              })
           }
       }
   }
