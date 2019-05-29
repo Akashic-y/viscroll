@@ -4,7 +4,6 @@
 > A Vue.js project
 
 
-demo地址：http://marxjiao.com/viscroll-demo/
 
 
 
