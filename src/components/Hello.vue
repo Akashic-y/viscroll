@@ -35,7 +35,9 @@ export default {
   name: 'hello',
   mounted() {
       this.$nextTick(() => {
-        this.$refs.content.style.width = '1800px';
+        this.$refs.content.style.width = '1800px';//实际情况要通过计算出来
+        let maxMoveWidth =1298
+        let doGo = false
         //$refs绑定元素
         if(!this.scroll){
             this.scroll = new BScroll(this.$refs.wrapper, {
@@ -47,8 +49,21 @@ export default {
               probeType:3,//监听scroll
             })
             this.scroll.on('scroll', (pos) => {
-              console.log(-pos.x - 1298)
+              //1298正常距离 260多出去的距离
+              console.log(-pos.x - 50)
+              if(pos.x < -(maxMoveWidth + 50) && !doGo){
+                  doGo = true
+              }
               document.getElementById('yuan').style.right = -pos.x - 1298 - 260 +'px'
+            })
+            this.scroll.on('scrollEnd', (pos) => {
+              if(doGo && pos.x <= -(maxMoveWidth-5)){
+                    doGo = false
+                    //逻辑
+                    console.log('逻辑')
+                }else{
+                    doGo = false
+                }
             })
         }else if(!this.$refs.wrapper){
             return
